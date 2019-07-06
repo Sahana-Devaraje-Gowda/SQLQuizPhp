@@ -1,0 +1,2 @@
+# Send all responses in utf-8
+AddDefaultCharset utf-8
