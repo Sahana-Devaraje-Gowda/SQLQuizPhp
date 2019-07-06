@@ -21,6 +21,7 @@ RewriteRule ^trainee-(\d+)+_group$ group_controller.php?trainee_id=$1
 RewriteRule ^trainee-(\d+)+_join$ group_controller.php?trainee_id=$1&action=join
 RewriteRule ^trainee-(\d+)+_account$ evaluation_home_controller.php?trainee_id=$1
 RewriteRule ^trainee-(\d+)+_evaluation$ trainee_evaluation_controller.php?trainee_id=$1
+RewriteRule ^trainee-(\d+)+_trainee_detail$ trainee_detail_controller.php?trainee_id=$1
 
 
 
@@ -35,4 +36,5 @@ RewriteRule ^trainer-(\d+)+_group-(\d+)+_validate$ trainer_group_controller?trai
 RewriteRule ^trainer-(\d+)+_group-(\d+)+_remove$ trainer_group_controller?trainer_id=$1&action=remove&group_id=$2
 RewriteRule ^trainer-(\d+)+_evaluation$ trainer_evaluation_controller.php?trainer_id=$1
 RewriteRule ^evaluation-(\d+)+_evaluation_detail$ sheet_controller.php?evaluation_id=$1
+RewriteRule ^quiz-(\d+)+_quiz_detail$ question_list_controller.php?quiz_id=$1
 #RewriteRule ^trainer-(\d+)+_evaluation$ trainer_evaluation.php?trainer_id=$1

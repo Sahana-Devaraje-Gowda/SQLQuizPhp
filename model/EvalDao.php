@@ -102,16 +102,16 @@ class EvalDao {
    */
   public static function getDetailOfEvaluation($evaluation_id) {
     $db = DB::getConnection();
-    $sql = "UPDATE evaluation e1
-            JOIN sheet s1 ON s1.:evaluation_id = e1.:evaluation_id
-            SET e1.corrected_at = s1.corrected_at
-            WHERE s1.corrected_at IS NOT NULL;";
+    $sql = "SELECT evaluation_id,title,diagram_path,scheduled_at,ending_at,corrected_at ,e.quiz_id,tr.trainee_id FROM evaluation e
+            INNER JOIN sql_quiz sq ON e.quiz_id = sq.quiz_id
+            INNER JOIN quiz_db qd ON sq.db_name = qd.db_name
+            INNER JOIN training tr ON e.quiz_id = tr.quiz_id
+            WHERE e.evaluation_id = :evaluation_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(":evaluation_id", $evaluation_id);
     $stmt->execute();
     $db = null;
     $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($list);
     return $list;
   }
 
@@ -145,6 +145,21 @@ class EvalDao {
     }
     $filtred = array("coming" => $coming, "finished" => $finished, "corrected" => $corrected);
     return $filtred;
+  }
+
+   /**
+   * 
+   * @param int $eval_id id of the evaluation
+   * @return int $ok return if the update request was succefull
+   */
+  public static function setCompleted($eval_id) {
+    $db = DB::getConnection();
+    $sql = "update evaluation set corrected_at=now() where evaluation_id=:eval_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":eval_id", $eval_id);
+    $ok = $stmt->execute();
+    $db = null;
+    return $ok;
   }
 
 }
