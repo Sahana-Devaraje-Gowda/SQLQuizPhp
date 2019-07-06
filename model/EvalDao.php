@@ -102,7 +102,10 @@ class EvalDao {
    */
   public static function getDetailOfEvaluation($evaluation_id) {
     $db = DB::getConnection();
-    $sql = "";
+    $sql = "UPDATE evaluation e1
+            JOIN sheet s1 ON s1.:evaluation_id = e1.:evaluation_id
+            SET e1.corrected_at = s1.corrected_at
+            WHERE s1.corrected_at IS NOT NULL;";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(":evaluation_id", $evaluation_id);
     $stmt->execute();
