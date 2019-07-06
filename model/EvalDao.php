@@ -78,6 +78,24 @@ class EvalDao {
     return $list;
   }
 
+    /*
+   * 
+   * @param int $trainer_id id of a trainer
+   * @return $list return a list of quiz by a trainer
+   */
+  public static function getQuizOfTrainer($trainer_id) {
+    $db = DB::getConnection();
+    $sql = "SELECT * FROM sql_quiz sq 
+            JOIN evaluation e ON sq.quiz_id=e.quiz_id 
+            JOIN usergroup u ON e.group_id = u.group_id 
+            WHERE u.creator_id =:trainer_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":trainer_id", $trainer_id);
+    $stmt->execute();
+    $db = null;
+    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $list;
+  }
   
   /**
    * 
