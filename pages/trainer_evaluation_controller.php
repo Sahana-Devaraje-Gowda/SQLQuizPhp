@@ -29,8 +29,6 @@ if (!isset($_SESSION["user"]["name"])) {
             try {
               include '../model/EvalDao.php';
               $getEval = EvalDao::getEvaluationsOfTrainer($trainer_id);
-              //Get the quiz list
-              $getQuiz = EvalDao::getQuizOfTrainer($trainer_id);
               if (!isset($getEval) || is_array($getEval) == false) {
                 $ex = " Evaluation is not define";
                 $errors['eval'] = "The server endure the following error: " . $ex;
