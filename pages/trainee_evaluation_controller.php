@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $errors = array();
 /*
@@ -32,13 +31,14 @@ if (!isset($_SESSION["user"]["name"])) {
         try {
           include '../model/EvalDao.php';
           $getEval = EvalDao::getFilteredTrainee(EvalDao::getEvaluationsTrainee($trainee_id));
+
           if (!isset($getEval) || is_array($getEval) == false) {
             $ex = " Evaluation is not define";
             $errors['eval'] = "The server endure the following error: " . $ex;
             include_once '../view/error_view.php';
           }
-
           require_once '../view/trainee_evaluation_view.php';
+
         } catch (PDOException $ex) {
           $errors['PDOError'] = "The server endure the following error: " . $ex;
           include_once '../view/error_view.php';

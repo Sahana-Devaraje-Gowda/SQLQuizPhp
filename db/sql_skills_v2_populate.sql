@@ -38,7 +38,7 @@ BEGIN
 			(7, 'Agrégats'),
 			(8, 'Divers');
 		
-			INSERT INTO person (person_id, email, pwd, name, first_name, created_at, validated_at, is_trainer) VALUES 
+		INSERT INTO person (person_id, email, pwd, name, first_name, created_at, validated_at, is_trainer) VALUES 
 				(1, 'etudiant1@gmail.com', 'azerty', 'Sherlock', 'Holmes', NOW() - INTERVAL 3 DAY, NOW() - INTERVAL 2 DAY - INTERVAL 2 HOUR, 0),
 				(2, 'etudiant2@gmail.com', 'azerty', 'Obama', 'Barack', NOW() - INTERVAL 2 DAY, NOW() - INTERVAL 1 DAY - INTERVAL 2 HOUR, 0),
 				(3, 'etudiant3@gmail.com', 'azerty', 'Curie', 'Marie', NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 2 HOUR, 0),
@@ -48,13 +48,13 @@ BEGIN
 				(7, 'formateur2@gmail.com', 'azerty', 'Zola', 'Emile',  NOW() - INTERVAL 4 DAY, NOW() - INTERVAL 3 DAY - INTERVAL 22 HOUR, 1),
 				(8, 'formateur3@gmail.com', 'azerty', 'Bert', 'Paul',  NOW() - INTERVAL 4 DAY, NOW() - INTERVAL 3 DAY - INTERVAL 22 HOUR, 1);
 
-			INSERT INTO usergroup (group_id, name, created_at, creator_id) VALUES 
+		INSERT INTO usergroup (group_id, name, created_at, creator_id) VALUES 
 				(1, 'Concepteur Développeur Informatique', now(), 6),
 				-- (2, 'Tout le monde', now(), 6),
 				(2, 'Assistant à Maîtrise d\'Ouvrage', now(), 7),
 				(3, 'Big Data Analyst', now(), 7);
 				
-			INSERT INTO group_member (person_id, group_id, validated_at) VALUES 
+		INSERT INTO group_member (person_id, group_id, validated_at) VALUES 
 				(1, 2, NULL),
 				(1, 3, NOW()),
 				(2, 2, NULL),
@@ -64,16 +64,16 @@ BEGIN
 				(4, 3, NOW()),
 				(5, 3, NOW());
 				
-			INSERT INTO quiz_db ( db_name, diagram_path, creation_script_path, description) VALUES
+		INSERT INTO quiz_db ( db_name, diagram_path, creation_script_path, description) VALUES
 				('banque', 'banque.png', NULL, 'Ceci est un description exacte de la base de données banque'),
 				('avions', 'avions.png', NULL, 'Trust nobody not even yourself');
-			INSERT INTO sql_quiz (quiz_id, author_id, title, is_public, db_name) VALUES 
+		INSERT INTO sql_quiz (quiz_id, author_id, title, is_public, db_name) VALUES 
 				(1, 6, 'Quiz Banque', 1, 'banque'),
 			  (2, 7, 'Quiz Avion', 0, 'avions'),
 				(3, 6, 'Quiz privé', 1, 'banque');
 				
 				
-			INSERT INTO sql_question (question_id, db_name, question_text, correct_answer, theme_id, author_id, is_public, correct_result) VALUES 
+		INSERT INTO sql_question (question_id, db_name, question_text, correct_answer, theme_id, author_id, is_public, correct_result) VALUES 
 				(1, 'banque', 'Nom et email de tous les clients', 'SELECT nom, email FROM client;', 1, 6, 0, '[Dupont, dupont@interpol.com]\n[Tintin, tintin@herge.be]\n[Haddock, haddock@moulinsart.fr]\n[Castafiore, bianca@scala.it]'),
 				(2, 'banque', 'Dates d\'attribution des clients aux commerciaux', 'SELECT date_attribution FROM portefeuille;', 1, 6, 0, '2005-12-23\n2010-04-21\n2015-04-12\n2015-04-12'),
 				(3, 'banque', 'Date d\'attribution sans doublon' ,'SELECT DISTINCT date_attribution FROM portefeuille;' ,1, 6, 1, '2005-12-23\n2010-04-21\n2015-04-12'),
@@ -91,7 +91,7 @@ BEGIN
 				(15, 'avions', 'Pilotes sans vol (avec HAVING)', 'SELECT p.id_pilote, nom, COUNT(id_avion) AS nb_vols FROM pilote p LEFT OUTER JOIN vol v ON p.id_pilote = v.id_pilote GROUP BY p.id_pilote, nom HAVING nb_vols = 0;', 6, 7, 1, ''),
 				(16, 'avions', 'Avions volant le 12/04/2015 (imbriquée n valeurs)', 'SELECT * FROM avion WHERE id_avion IN (SELECT id_avion FROM vol WHERE date(date_depart) = \'2015-04-12\');', 5, 7, 1, '');
 				
-			INSERT INTO sql_quiz_question(question_id, quiz_id, rank) VALUES 
+				INSERT INTO sql_quiz_question(question_id, quiz_id, rank) VALUES 
 				(1, 1, 1),
 				(2, 1, 2),
 				(3, 1, 3),
@@ -110,7 +110,7 @@ BEGIN
 				(16, 2, 8);
 				
 				
-			INSERT INTO evaluation (evaluation_id, group_id, scheduled_at, ending_at, corrected_at, quiz_id) VALUES 
+				INSERT INTO evaluation (evaluation_id, group_id, scheduled_at, ending_at, corrected_at, quiz_id) VALUES 
 				(1,  1, NOW() - INTERVAL 2 DAY, NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 1 DAY, 1),
 				(2, 1, NOW() - INTERVAL 2 DAY, NOW() + INTERVAL 2 DAY, NULL, 1),
 				(5, 2, NOW() + INTERVAL 3 DAY, NOW() + INTERVAL 12 DAY, NULL, 1);
@@ -119,7 +119,7 @@ BEGIN
 				
 				
 				
-			INSERT INTO training (training_id, quiz_id, trainee_id, started_at,ended_at) VALUES 
+				INSERT INTO training (training_id, quiz_id, trainee_id, started_at,ended_at) VALUES 
 				(1, 1, 1, NOW() - INTERVAL 3 DAY,null),
 				(2, 2, 2, NOW() - INTERVAL 5 DAY,null),
 				(3, 1, 3, NOW() - INTERVAL 7 DAY,now()),

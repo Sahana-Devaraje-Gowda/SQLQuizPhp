@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,6 +46,72 @@ class EvalDao {
     return $list;
   }
 
+    /**
+   * 
+   * @param int $quiz_id id of a quiz
+   * @return $list return a list of evaluations for a trainee
+   */
+  public static function getQuestions($quiz_id) {
+    $db = DB::getConnection();
+    $sql = "SELECT * FROM sql_question sqn JOIN sql_quiz_question sqz ON sqz.question_id=sqn.question_id\n WHERE sqz.quiz_id=:quiz_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":quiz_id", $quiz_id);
+    $stmt->execute();
+    $db = null;
+    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $list;
+  }
+
+  /**
+   * 
+   * @param int $trainer_id id of a trainer
+   * @return $list return a list of evaluations by a trainer
+   */
+  public static function getEvaluationsOfTrainer($trainer_id) {
+    $db = DB::getConnection();
+    $sql = "SELECT * FROM evaluation e JOIN usergroup u ON e.group_id = u.group_id JOIN sql_quiz sq ON sq.quiz_id=e.quiz_id WHERE u.creator_id =:trainer_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":trainer_id", $trainer_id);
+    $stmt->execute();
+    $db = null;
+    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $list;
+  }
+
+  
+  /**
+   * 
+   * @param int $trainee_id id of a trainer
+   * @return $list return a list of evaluations by a trainer
+   */
+  public static function getTraineeDetails($trainee_id) {
+    $db = DB::getConnection();
+    $sql = "SELECT person_id, name, first_name from person where person_id=:trainee_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":trainee_id", $trainee_id);
+    $stmt->execute();
+    $db = null;
+    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $list;
+  }
+
+/**
+   * 
+   * @param int $evaluation_id id of a trainer
+   * @return $list return a list of evaluations by a trainer
+   */
+  public static function getDetailOfEvaluation($evaluation_id) {
+    $db = DB::getConnection();
+    $sql = "";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":evaluation_id", $evaluation_id);
+    $stmt->execute();
+    $db = null;
+    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($list);
+    return $list;
+  }
+
   /**
    * @param array $evaluations list of all evaluations of a trainee
    * @return array $filtred  list of filtred evaluations
@@ -78,54 +143,5 @@ class EvalDao {
     $filtred = array("coming" => $coming, "finished" => $finished, "corrected" => $corrected);
     return $filtred;
   }
-
-  public static function getEvaluationList(trainer_id) {
-    $db = DB::getConnection();
-    $sql = "SELECT e.evaluation_id,creator_id, sq.quiz_id, e.scheduled_at, e.ending_at, e.corrected_at, sq.title, sq.db_name FROM evaluation e JOIN usergroup u ON e.group_id = u.group_id  JOIN sql_quiz sq ON sq.quiz_id=e.quiz_id WHERE u.creator_id =:trainer_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(":trainer_id", $trainer_id);
-    $stmt->execute();
-    $db = null;
-    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $list;
-  }
-
-  public static function getEvaluationDetails(evaluation_id) {
-    $db = DB::getConnection();
-    $sql = //"SELECT * FROM evaluation e JOIN usergroup u \nON e.group_id = u.group_id  JOIN sql_quiz sq\n ON sq.quiz_id=e.quiz_id WHERE u.creator_id =:trainer_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(":trainer_id", $trainer_id);
-    $stmt->execute();
-    $db = null;
-    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $list;
-  }
-
-   public static function getQuestions(quiz_id) {
-    $db = DB::getConnection();
-    $sql = "SELECT * FROM sql_question sqn \nJOIN sql_quiz_question sqz \nON sqz.question_id=sqn.question_id\n WHERE sqz.quiz_id=:quiz_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(":quiz_id", $quiz_id);
-    $stmt->execute();
-    $db = null;
-    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $list;
-  }
-
-  public static function getTraineeDetails(trainee_id) {
-    $db = DB::getConnection();
-    $sql = "SELECT person_id, name, first_name from person \nwhere person_id=:trainee_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(":trainee_id", $trainee_id);
-    $stmt->execute();
-    $db = null;
-    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $list;
-  }
-
-
-
-
-
 
 }

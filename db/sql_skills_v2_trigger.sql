@@ -1,4 +1,5 @@
 DELIMITER $$
+DROP TRIGGER IF EXISTS evaluation_after_insert$$
 CREATE TRIGGER evaluation_after_insert
 AFTER INSERT ON evaluation
 FOR EACH ROW
@@ -21,6 +22,7 @@ BEGIN
   CLOSE person_list;
 END$$
 
+DROP TRIGGER IF EXISTS group_member_after_insert$$
 CREATE TRIGGER group_member_after_insert
 AFTER INSERT ON group_member
 FOR EACH ROW
@@ -39,6 +41,8 @@ BEGIN
 	CLOSE eval_list;
 END$$
 
+
+DROP TRIGGER IF EXISTS sheet_after_insert$$
 CREATE TRIGGER sheet_after_insert
 AFTER INSERT ON sheet
 FOR EACH ROW
@@ -54,6 +58,8 @@ BEGIN
   ); 
 END$$
 
+
+DROP TRIGGER IF EXISTS before_insert_question_in_quiz$$
 CREATE TRIGGER before_insert_question_in_quiz
 AFTER INSERT ON sql_quiz_question
 FOR EACH ROW
@@ -95,8 +101,6 @@ END$$
 DROP USER  sql_skills_v2_user@'localhost'  $$
 CREATE USER IF NOT EXISTS sql_skills_v2_user@'localhost' IDENTIFIED BY 'sql_skills_v2_pwd' $$
 GRANT ALL ON sql_skills_v2.* TO sql_skills_v2_user@localhost $$
-
-
 
 
 CALL sql_skills_v2_reset() $$	

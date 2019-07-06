@@ -58,7 +58,7 @@ class TrainerGroupDao {
 
   /**
    * 
-    @param int $group_id
+   * @param int $group_id
    * @return array $list the number of not validated trainee for group
    * 
    */
