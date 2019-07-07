@@ -27,7 +27,7 @@
         <li>Corrected_at : <?=$corrected_at?></li><br>
     <?php } 
         else { ?>
-        <a href="" onClick="">Complete</a>
+        <a href="complete.php?complete=true&evaluation_id=<?=$evaluation_id?>" onClick="">Complete</a>
     <?php }  ?>
       </div>
 <?php  break; } ?>
