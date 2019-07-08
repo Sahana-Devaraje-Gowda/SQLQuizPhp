@@ -1,5 +1,4 @@
-<?php require_once("header.php"); 
-?>
+<?php require_once("header.php"); ?>
 
 <div class="trainee-details">
   <h1> Trainee-Detail </h1>
@@ -20,6 +19,7 @@
     <h1> Question-List </h1>
     <ul>
   <?php
+    $evaluation_id = $_GET["evaluation_id"];
     if (count($getEval2) > 0) {
       foreach ($getEval2 as $unequestion) {
         $db_name=$unequestion["db_name"];
@@ -30,7 +30,7 @@
         <div class="question-card">
 
         <? if($correctedVal == NULL){ ?>
-           <li>Question No. <a href='evaluation-' . $unequestion["evaluation_id"] .'question-' $unequestion["question_id"]><?=$question_id?></a> [ <?=$question_text?> ] Topic : <?=$db_name?> Rank : <?=$rank?></li><br>                    
+           <li>Question No. <a href=<?='question-'.$question_id.'_evaluation_id-'.$evaluation_id.'_result'?>><?=$question_id?></a> [ <?=$question_text?> ] Topic : <?=$db_name?> Rank : <?=$rank?></li><br>                    
         </div>
         <?php
       }

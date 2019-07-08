@@ -37,4 +37,5 @@ RewriteRule ^trainer-(\d+)+_group-(\d+)+_remove$ trainer_group_controller?traine
 RewriteRule ^trainer-(\d+)+_evaluation$ trainer_evaluation_controller.php?trainer_id=$1
 RewriteRule ^evaluation-(\d+)+_evaluation_detail$ sheet_controller.php?evaluation_id=$1
 RewriteRule ^quiz-(\d+)+_quiz_detail$ question_list_controller.php?quiz_id=$1
+RewriteRule ^question-(\d+)+_evaluation_id-(\d+)+_result$ resultCompController.php?question_id=$1&evaluation_id=$2
 #RewriteRule ^trainer-(\d+)+_evaluation$ trainer_evaluation.php?trainer_id=$1

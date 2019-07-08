@@ -4,8 +4,7 @@
     $complete = $_GET["complete"];
     if($complete=="true") {
         include '../model/EvalDao.php';
-        $getEval = EvalDao::setCompleted($evaluation_id);
-        
+        $getEval = EvalDao::setCompleted($evaluation_id);     
     } 
     header('Location: ./evaluation-' . $evaluation_id . '_evaluation_detail');
 ?>
