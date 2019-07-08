@@ -5,7 +5,7 @@
 
   <ul>
 
-  <table style="width:100%">
+  <table style="width:100%" border="1">
   <tr>
           <th>question_text</th>
           <th>student answer</th> 

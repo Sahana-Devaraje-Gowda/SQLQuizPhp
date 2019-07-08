@@ -4,7 +4,7 @@ participant View
 
 == get the List ==
 
-Browser -> Controller:\n GET /trainer-{trainer-id}-evaluations
+Browser -> Controller:\n GET /trainer-{trainer_id}-evaluations
 Controller -> Controller: checks the trainer id is valid
 Controller -> Dao: EvalDao.getEvaluationList()
 Dao -> DBMS: SELECT * FROM evaluation e JOIN usergroup u \nON e.group_id = u.group_id  JOIN sql_quiz sq\n ON sq.quiz_id=e.quiz_id WHERE u.creator_id =:trainer-id
@@ -15,8 +15,8 @@ View -> Browser: List is displayed
 
 == click on the Evaluation id to get the details\n to enable/disable Complete EValuation ===
 
-Browser -> Controller:\n GET /trainer-{trainer-id}-evaluations-{evaluation-id}
-Controller -> Dao: EvalDao.getEvaluationDetails(evaluation-id)
+Browser -> Controller:\n GET /trainer-{trainer-id}-evaluations-{evaluation_id}
+Controller -> Dao: EvalDao.getEvaluationDetails(evaluation_id)
 Dao -> DBMS: SELECT * FROM....
 DBMS -> Dao: an empty list or a list with values is obtained
 Dao -> Controller:list or empty list is found,\n get the count of rows \nand count of not null corrected_at values
@@ -26,7 +26,7 @@ View -> Browser: List is displayed;\n If values are equal Enable Complete Evalua
 
 == click on the quiz id to display the questions ====
 
-Browser -> Controller:\n GET /trainer-{trainer-id}-evaluations-{evaluation-id}-quiz-{quiz-id}
+Browser -> Controller:\n GET /trainer-{trainer_id}-evaluations-{evaluation_id}-quiz-{quiz-id}
 Controller -> Dao: EvalDao.getQuestions(quiz-id)
 Dao -> DBMS: SELECT * FROM sql_question sqn \nJOIN sql_quiz_question sqz \nON sqz.question_id=sqn.question_id\n WHERE sqz.quiz_id=1
 DBMS -> Dao: an empty list or a list with values is obtained
@@ -37,13 +37,31 @@ View -> Browser: List is displayed;
 
 == click on the trainee id to display the details\n of the trainee ====
 
-Browser -> Controller:\n GET /trainer-{trainer-id}-evaluations--{evaluation-id}-trainee-{trainee-id}
-Controller -> Dao: EvalDao.getTraineeDetails(trainee-id)
-Dao -> DBMS: SELECT person_id, name, first_name from person \nwhere person_id=:trainee-id
+Browser -> Controller:\n GET /trainer-{trainer_id}-evaluations--{evaluation_id}-trainee-{trainee_id}
+Controller -> Dao: EvalDao.getTraineeDetails(trainee_id)
+Dao -> DBMS: SELECT person_id, name, first_name from person \nwhere person_id=:trainee_id
 DBMS -> Dao: an empty list or a list with values is obtained
 Dao -> Controller:list or empty list is found,\n get the count of rows \nand count of not null corrected_at values
 Controller -> View: Trainee_Details.php
 View -> Browser: List is displayed; 
 
+
+@enduml
+
+
+
+@startuml
+participant Browser
+participant View
+
+== get the List ==
+
+Browser -> Controller:\n GET /trainer-{trainer_id}-evaluation-{trainee_id}
+Controller -> Dao: EvalDao.getEvaluationResults(trainee_id)
+Dao -> DBMS: SELECT * FROM ...
+DBMS -> Dao: an empty list or a list with values is obtained
+Dao -> Controller:list or empty list is found
+Controller -> View: evaluation_Results.php
+View -> Browser: List is displayed
 
 @enduml
