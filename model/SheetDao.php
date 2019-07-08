@@ -87,5 +87,42 @@ class SheetDao {
     $db = null;
     return $ok;
   }
+  
+  
+  //Get all the question text and its id as to diplay all questions in a set 5.1(The complete set of questions is displayed. )
+// but in 5.2(Each question displays the question text, at left the student query and below its result, at right the trainer query and below its result.)
+//so we have to use the question id to get [student query result] and its corresponding [trainer query result]
+//Hence we hav the next function getAnswersForTheQuestionByTrainee($question_id)
+
+//
+//Please comment on this new functions getAllQuestions() & getAnswersForTheQuestionByTrainee() if you think its not right.
+//
+
+public static function getAllQuestions() {
+  $db = DB::getConnection();
+  $sql = "SELECT question_id , question_text FROM sql_question";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  $db = null;
+  $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $list;
+}
+
+
+//Here by joining sql_question and sheet_answer
+// on question_id(common)
+//based on the  each question id we will get answer(student/trainee) and gives_correct_result
+//this function will be iterated based on each question_id
+public static function getAnswersForTheQuestionByTrainee($question_id)
+{
+  $db = DB::getConnection();
+  $sql = "SELECT * FROM sheet_answer sa JOIN sql_question sqla ON sa.question_id=sqla.question_id WHERE sa.question_id=:question_id";
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(":question_id", $question_id);
+  $stmt->execute();
+  $db = null;
+  $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $list;
+}
 
 }
