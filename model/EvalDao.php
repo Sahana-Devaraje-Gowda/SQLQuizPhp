@@ -120,7 +120,7 @@ class EvalDao {
    */
   public static function getDetailOfEvaluation($evaluation_id) {
     $db = DB::getConnection();
-    $sql = "SELECT evaluation_id,title,diagram_path,scheduled_at,ending_at,corrected_at ,e.quiz_id,tr.trainee_id FROM evaluation e
+    $sql = "SELECT evaluation_id,title,diagram_path,scheduled_at,ending_at,corrected_at ,e.quiz_id,tr.trainee_id,sq.author_id FROM evaluation e
             INNER JOIN sql_quiz sq ON e.quiz_id = sq.quiz_id
             INNER JOIN quiz_db qd ON sq.db_name = qd.db_name
             INNER JOIN training tr ON e.quiz_id = tr.quiz_id

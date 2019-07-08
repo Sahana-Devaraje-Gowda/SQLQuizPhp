@@ -6,11 +6,11 @@ $errors = array();
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 $trainee_id=$_GET['trainee_id'];  
+$quiz_id=$_GET['quiz_id'];
 include '../model/EvalDao.php';
 $getEval = EvalDao::getTraineeDetails($trainee_id);
-
+$getEval2 = EvalDao::getQuestions($quiz_id);
 if (!isset($getEval) || is_array($getEval) == false) {
   $ex = " Evaluation is not define";
   $errors['eval'] = "The server endure the following error: " . $ex;
