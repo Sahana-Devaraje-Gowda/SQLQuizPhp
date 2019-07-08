@@ -6,6 +6,14 @@
   <ul>
 
   <table style="width:100%">
+  <tr>
+          <th>question_text</th>
+          <th>student answer</th> 
+          <th>student result</th>
+          <th>correct_answer</th>
+          <th>correct_result</th>
+          
+        </tr>
   <?php
     if (count($getResults) > 0) {
       foreach ($getResults as $uneResults) {
