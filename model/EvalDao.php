@@ -180,4 +180,20 @@ class EvalDao {
     return $ok;
   }
 
+
+  public static function displayResults($question_id, $evaluation_id)
+   {
+    $db = DB::getConnection();
+    $sql = "SELECT sq.question_text, sh.answer, sh.result, sq.correct_answer, sq.correct_result from sheet_answer sh 
+               JOIN sql_question sq ON sq.question_id=sh.question_id
+               WHERE sh.question_id=:question_id and sh.evaluation_id=:evaluation_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":question_id", $question_id);
+    $stmt->bindValue(":evaluation_id", $evaluation_id);
+    $ok = $stmt->execute();
+    $db = null;
+    $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $list;
+   }
+
 }

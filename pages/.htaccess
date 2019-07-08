@@ -21,7 +21,7 @@ RewriteRule ^trainee-(\d+)+_group$ group_controller.php?trainee_id=$1
 RewriteRule ^trainee-(\d+)+_join$ group_controller.php?trainee_id=$1&action=join
 RewriteRule ^trainee-(\d+)+_account$ evaluation_home_controller.php?trainee_id=$1
 RewriteRule ^trainee-(\d+)+_evaluation$ trainee_evaluation_controller.php?trainee_id=$1
-RewriteRule ^trainee-(\d+)+_quiz_id-(\d+)+_trainee_detail$ trainee_detail_controller.php?trainee_id=$1&quiz_id=$2
+RewriteRule ^trainee-(\d+)+_quiz_id-(\d+)+_evaluation_id-(\d+)+_trainee_detail$ trainee_detail_controller.php?trainee_id=$1&quiz_id=$2&evaluation_id=$3
 
 
 

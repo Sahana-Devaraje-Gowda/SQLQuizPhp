@@ -36,10 +36,11 @@
     <ul>
       <?php 
       foreach($getEval as $uneEval) {
+          $evaluation_id = $uneEval["evaluation_id"];
           $trainee_id = $uneEval["trainee_id"];
           $quiz_id = $uneEval["quiz_id"];
           ?>
-      <li>Trainee_id : <a href=<?= 'trainee-'.$trainee_id .'_quiz_id-'.$quiz_id.'_trainee_detail'?>><?=$trainee_id?></a></li>
+      <li>Trainee_id : <a href=<?= 'trainee-'.$trainee_id .'_quiz_id-'.$quiz_id.'_evaluation_id-'.$evaluation_id.'_trainee_detail'?>><?=$trainee_id?></a></li>
    <?php  } ?>
     </ul>
 </div>

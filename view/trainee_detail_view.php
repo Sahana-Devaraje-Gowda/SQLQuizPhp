@@ -30,7 +30,7 @@
         <div class="question-card">
 
         <? if($correctedVal == NULL){ ?>
-          <li>Question No. <?=$question_id?> [ <?=$question_text?> ] Topic : <?=$db_name?> Rank : <?=$rank?></li><br>          
+          <li>Question No. <a href=""><?=$question_id?></a> [ <?=$question_text?> ] Topic : <?=$db_name?> Rank : <?=$rank?></li><br>          
         </div>
         <?php
       }
