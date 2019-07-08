@@ -16,7 +16,7 @@ $errors = array();
             try {
               include '../model/EvalDao.php';
               $getResults = displayResults($question_id,$evaluation_id)
-              if (!isset($getEval) || is_array($getEval) == false) {
+              if (!isset($getResults) || is_array($getResults) == false) {
                 $ex = " Evaluation is not define";
                 $errors['eval'] = "The server endure the following error: " . $ex;
                 include_once '../view/error_view.php';
