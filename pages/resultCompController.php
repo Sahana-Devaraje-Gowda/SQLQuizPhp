@@ -21,7 +21,7 @@ $errors = array();
                 $errors['eval'] = "The server endure the following error: " . $ex;
                 include_once '../view/error_view.php';
               }
-              require_once '../view/trainer_evaluation_view.php';
+              require_once '../view/results_view.php';
             } catch (PDOException $ex) {
               $errors['PDOError'] = "The server endure the following error: " . $ex;
               include_once '../view/error_view.php';
